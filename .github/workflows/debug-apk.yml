@@ -11,6 +11,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out source
         uses: actions/checkout@v4
@@ -26,11 +27,12 @@ jobs:
 
       - name: Build debug APKs
         run: ./gradlew :app:assembleDebug
+        working-directory: bitchat-android-main
 
       - name: Upload APKs
         uses: actions/upload-artifact@v4
         with:
           name: bitchat-debug-apks
-          path: app/build/outputs/apk/debug/*.apk
+          path: bitchat-android-main/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
           retention-days: 14
